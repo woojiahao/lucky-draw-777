@@ -1,4 +1,13 @@
-import {Body, Controller, Get, Inject, Param, Redirect, ParseIntPipe, Post, Res} from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    Inject,
+    Param,
+    Post,
+    Res,
+    NotFoundException, BadRequestException
+} from '@nestjs/common';
 import { CreateUrlDto } from './url.dto';
 import { Url } from './url.entity';
 import { UrlService } from './url.service';
@@ -10,8 +19,16 @@ export class UrlController {
 
     @Get(':hash')
      public async getUrl(@Res() res, @Param('hash') hash: string): Promise<void> {
-        const original = await this.service.getUrl(hash).then(url => url.original);
-        return res.redirect(original)
+        const url = await this.service.getUrl(hash);
+        if (url) {
+            const original = url.original;
+            if (original.startsWith("http://") || original.startsWith("https://")) {
+                return res.redirect(original);
+            }
+            return res.redirect(`https://${original}`);
+        } else {
+            throw new NotFoundException();
+        }
     }
 
     @Post('/url')
