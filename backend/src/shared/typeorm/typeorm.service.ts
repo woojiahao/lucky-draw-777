@@ -23,7 +23,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
             logger: 'file',
             synchronize: true, // never use TRUE in production!
             ssl: {
-                'ca': fs.readFileSync('./src/shared/typeorm/ca-certificate.crt')
+                'ca': fs.readFileSync('./ca-certificate.crt')
             }
         };
     }
