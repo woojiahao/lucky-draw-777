@@ -6,10 +6,27 @@
 
 @layer base {
   body {
-    @apply bg-yellow-200 font-sans text-lg;
+    @apply bg-money bg-repeat bg-[length:200px] font-sans text-lg;
   }
 
   h1 {
     @apply font-bold text-mxl;
+  }
+}
+
+@layer components {
+  @keyframes auto-resizing {
+    from {
+      font-size: xx-small;
+    }
+
+    to {
+      font-size: xx-large;
+    }
+  }
+
+  .auto-resizing {
+    animation-name: auto-resizing;
+    animation-iteration-count: infinite;
   }
 }
