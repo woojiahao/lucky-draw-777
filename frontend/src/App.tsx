@@ -57,7 +57,7 @@ function App() {
             <input ref={urlRef} type="text" name="url" id="url" className="rounded-lg border-solid border-8 border-black p-8 border-y-2" onChange={() => {
               playSound()
             }} />
-            <button id="sub" className="absolute right-[-150px] p-8 bg-purple-300 font-bold" onMouseEnter={move} onClick={async () => await submit()}></button>
+            <button id="sub" className="absolute right-[-150px] p-8 bg-purple-300 font-bold" onMouseEnter={move} onClick={async () => await submit()}>submit</button>
           </div>
         </div>
         <img src={luckyDraw} alt="Lucky Draw" className="w-[400px]" />
