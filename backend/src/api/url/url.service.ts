@@ -10,8 +10,8 @@ export class UrlService {
     @InjectRepository(Url)
     private readonly repository: Repository<Url>;
 
-    public getUrl(id: number): Promise<Url> {
-        return this.repository.findOneBy({ id });
+    public getUrl(hash: string): Promise<Url> {
+        return this.repository.findOneBy({ hash });
     }
 
     public createUrl(body: CreateUrlDto): Promise<Url> {
