@@ -24,12 +24,20 @@ function App() {
     }
   }
 
-  function submit(e: KeyboardEvent) {
-    if (e.code === 'Enter') {
-      e.stopPropagation();
-      // TODO: API request
+  async function submit(e: MouseEvent) {
+      const response = await fetch("localhost:3000/url",
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"original" : urlRef.current?.value.trim()})
+      })
+      return response.json();
     }
+  
   }
+
 
   return (
     <div className="flex justify-center flex-col w-[70%] my-16 mx-auto">
@@ -49,7 +57,7 @@ function App() {
             <input ref={urlRef} type="text" name="url" id="url" className="rounded-lg border-solid border-8 border-black p-8 border-y-2" onChange={() => {
               playSound()
             }} />
-            <button id="sub" className="absolute right-[-150px] p-8 bg-purple-300 font-bold" onMouseEnter={move}>submit</button>
+            <button id="sub" className="absolute right-[-150px] p-8 bg-purple-300 font-bold" onMouseEnter={move}>submit onClick={submit}</button>
           </div>
         </div>
         <img src={luckyDraw} alt="Lucky Draw" className="w-[400px]" />
