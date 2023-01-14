@@ -26,7 +26,7 @@ function App() {
   }
 
   async function submit() {
-    const response = await fetch("http://localhost:3000/url",
+    const response = await fetch("https://lucky-draw-777.woojiahao.com/url",
       {
         method: 'POST',
         headers: {
