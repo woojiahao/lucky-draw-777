@@ -6,6 +6,12 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app: NestExpressApplication = await NestFactory.create(AppModule);
+  app.enableCors({
+    allowedHeaders: '*',
+    origin: '*',
+    methods: ['POST', 'GET', 'OPTIONS'],
+    credentials: false
+  })
   const config: ConfigService = app.get(ConfigService);
   const port: number = config.get<number>('PORT');
 

@@ -2,6 +2,8 @@ import { Injectable, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
+const fs = require('fs')
+
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
     @Inject(ConfigService)
@@ -20,6 +22,9 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
             migrationsTableName: 'typeorm_migrations',
             logger: 'file',
             synchronize: true, // never use TRUE in production!
+            ssl: {
+                'ca': fs.readFileSync('./src/shared/typeorm/ca-certificate.crt')
+            }
         };
     }
 }
